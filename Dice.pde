@@ -1,21 +1,24 @@
 void setup()
 {
-  size(500, 500);
+  size(1000, 800);
   noLoop();
 }
 void draw()
 {
-  for (int x = 0; x < 36; x++) {
-    for (int y = 0; y < 36; y++) {
-      Die square = new Die(50, 50);
+  background(128);
+  for (int x = 0; x < 300; x += 10) {
+    for (int y = 0; y < 300; y += 10) {
+      Die square = new Die(x*4, y*4);
       square.show();
     }
   }
 }
+
 void mousePressed()
 {
   redraw();
 }
+
 class Die //models one single dice cube
 {
   int roll, myX, myY;
@@ -49,11 +52,10 @@ class Die //models one single dice cube
   }
   void show()
   {
-    fill(0, 0, 0);
-    stroke(255, 255, 255);
-    if(roll == 1)
-    {
-      
-    }
+    fill(255, 255, 255);
+    stroke(0, 0, 0);
+    strokeWeight(2);
+    rect(myX, myY, 40, 40, 10);
+    System.out.print(roll);
   }
 }
