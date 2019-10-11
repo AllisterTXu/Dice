@@ -1,17 +1,25 @@
 void setup()
 {
-  size(1000, 800);
+  background(128);
+  size(1000, 1000);
   noLoop();
 }
 void draw()
 {
-  background(128);
+  int dots = 0;
   for (int x = 0; x < 300; x += 10) {
     for (int y = 0; y < 300; y += 10) {
-      Die square = new Die(x*4, y*4);
+      Die square = new Die(x*5, y*5);
       square.show();
+      square.roll();
+      dots += square.roll;
     }
   }
+  fill(255);
+  rect(0, 900, 1000, 200);
+  fill(0);
+  textSize(24);
+  text("Sum of all rolls: " + dots, 100, 950);
 }
 
 void mousePressed()
@@ -22,33 +30,49 @@ void mousePressed()
 class Die //models one single dice cube
 {
   int roll, myX, myY;
-  double six1 = 1/6;
-  double six2 = 2/6;
-  double six3 = 3/6;
-  double six4 = 4/6;
-  double six5 = 5/6;
-  double six6 = 6/6;  
 
   Die(int x, int y) //constructor
   {
     myX = x;
     myY = y;
+    roll = (int)(Math.random()*6+1);
   }
   void roll()
   {
-    double check = Math.random();
-    if (check<six1)
-      roll = 1;
-    else if (check < six2)
-      roll = 2;
-    else if (check<six3)
-      roll = 3;
-    else if (check<six4)
-      roll = 4;
-    else if (check<six5)
-      roll = 5;
-    else 
-    roll = 6;
+    fill(0);
+    if (roll == 1) {
+      ellipse(myX+20, myY + 20, 10, 10);
+    }
+    if (roll == 2) {
+      ellipse(myX+5, myY + 35, 10, 10);
+      ellipse(myX+35, myY + 5, 10, 10);
+    }
+    if (roll == 3) {
+      ellipse(myX+5, myY + 35, 10, 10);
+      ellipse(myX+20, myY + 20, 10, 10);
+      ellipse(myX+35, myY + 5, 10, 10);
+    }
+    if (roll == 4) {
+      ellipse(myX+5, myY + 5, 10, 10);
+      ellipse(myX+35, myY + 5, 10, 10);
+      ellipse(myX+5, myY + 35, 10, 10);
+      ellipse(myX+35, myY + 35, 10, 10);
+    }
+    if (roll == 5) {
+      ellipse(myX+5, myY + 5, 10, 10);
+      ellipse(myX+35, myY + 5, 10, 10);
+      ellipse(myX+5, myY + 35, 10, 10);
+      ellipse(myX+35, myY + 35, 10, 10);
+      ellipse(myX+20, myY + 20, 10, 10);
+    }
+    if (roll == 6) { 
+      ellipse(myX+5, myY + 5, 10, 10);
+      ellipse(myX+35, myY + 5, 10, 10);
+      ellipse(myX+5, myY + 35, 10, 10);
+      ellipse(myX+35, myY + 35, 10, 10);
+      ellipse(myX+5, myY + 20, 10, 10);
+      ellipse(myX+35, myY + 20, 10, 10);
+    }
   }
   void show()
   {
@@ -56,6 +80,5 @@ class Die //models one single dice cube
     stroke(0, 0, 0);
     strokeWeight(2);
     rect(myX, myY, 40, 40, 10);
-    System.out.print(roll);
   }
 }
